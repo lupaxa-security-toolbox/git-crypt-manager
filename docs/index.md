@@ -2,8 +2,6 @@
 
 git-crypt-manager is a tool for managing git-crypt encrypted repositories.
 
-Current Version: v0.1.0
-
 Key features:
 
 - Secure lifecycle management for encrypted repositories
