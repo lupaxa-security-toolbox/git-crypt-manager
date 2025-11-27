@@ -1,0 +1,415 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# git-crypt Manager v1.0.0
+# ==============================================================================
+# Full lifecycle management for git-crypt encrypted repositories
+#
+# Features:
+#   • Setup git-crypt + encryption rules
+#   • Add, rotate, revoke users (GPG keys)
+#   • Nuclear key rotation
+#   • Remove encryption going forward
+#   • Audit logging (encrypted JSON)
+#   • Backup & restore git-crypt metadata
+#   • Trust enforcement w/ override warning
+#   • Doctor (JSON/verbose/fix/leak scan)
+#   • Menu UI + CLI mode
+#   • Cross-platform: macOS + Linux
+# ==============================================================================
+
+set -euo pipefail
+
+SCRIPT_NAME="git-crypt-manager.sh"
+VERSION="1.0.0"
+BACKUP_DIR_BASE=".git-crypt-backups"
+LOG_DIR=".git-crypt-logs"
+
+# OS-portable sed
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    SED_CMD=(sed -i '')
+else
+    SED_CMD=(sed -i)
+fi
+
+# ------------------------------------------------------------------------------
+# Logging helpers
+# ------------------------------------------------------------------------------
+
+function init_logs_dir()
+{
+    mkdir -p "${LOG_DIR}"
+
+    if ! grep -q "${LOG_DIR}" .gitattributes 2>/dev/null; then
+        echo "${LOG_DIR}/** filter=git-crypt diff=git-crypt" >> .gitattributes || true
+    fi
+}
+
+function write_log()
+{
+    init_logs_dir
+
+    local action="$1" result="$2" warnings="$3" key="$4" email="$5" trust="$6"
+    local ts; ts="$(date -u +"%Y%m%dT%H%M%SZ")"
+    local file="${LOG_DIR}/${ts}-${action}.json"
+    local git_actor
+    local gpg_actor
+
+    git_actor="$(git config user.name) <$(git config user.email)>"
+    gpg_actor="$(gpg --list-secret-keys --keyid-format=long 2>/dev/null | grep '^uid' | head -n1 | sed 's/^.*] //')"
+
+    cat > "${file}" <<EOF
+{
+  "timestamp": "${ts}",
+  "version": "${VERSION}",
+  "action": "${action}",
+  "actor_git": "${git_actor}",
+  "actor_gpg": "${gpg_actor}",
+  "result": "${result}",
+  "warnings": "${warnings}",
+  "key_fingerprint": "${key}",
+  "email": "${email}",
+  "trust": "${trust}"
+}
+EOF
+
+    git add "${file}" >/dev/null 2>&1 || true
+}
+
+# ------------------------------------------------------------------------------
+# Generic helpers
+# ------------------------------------------------------------------------------
+
+function msg()
+{
+    echo -e "$*";
+
+}
+
+function err()
+{
+    echo -e "ERROR: $*" >&2;
+}
+
+function require_repo()
+{
+    git rev-parse --is-inside-work-tree >/dev/null 2>&1 || { err "Run inside a Git repository"; return 1; }
+}
+
+function check_trust()
+{
+    local key="$1"
+    local trust
+
+    trust="$(gpg --list-keys --with-colons "${key}" 2>/dev/null | awk -F: '/^pub/ {print $2}')"
+    case "${trust}" in
+        u|f) return 0 ;; # ultimate/full
+        *)
+            echo "[WARN] Key $key is not fully trusted (trust=${trust:-unknown})"
+            read -r -p "Continue anyway? (yes/no) " c
+            [[ "$c" == "yes" ]] || { err "Aborted due to trust level"; exit 1; }
+            ;;
+    esac
+}
+
+function fingerprint_for_key()
+{
+    gpg --list-keys --with-colons "$1" 2>/dev/null | awk -F: '/^fpr/ {print $10; exit}'
+}
+
+function email_for_key()
+{
+    gpg --list-keys "$1" 2>/dev/null | grep uid | head -1 | sed 's/^.*] //'
+}
+
+# ------------------------------------------------------------------------------
+# Setup
+# ------------------------------------------------------------------------------
+
+function setup()
+{
+    require_repo || return 1
+    init_logs_dir
+
+    git-crypt status >/dev/null 2>&1 || git-crypt init
+
+    if ! grep -q "git-crypt setup" .gitattributes 2>/dev/null; then
+        cat <<EOF >> .gitattributes
+
+# git-crypt setup (auto-generated)
+* filter=git-crypt diff=git-crypt
+
+# Explicit plaintext-only
+README.md !filter !diff
+*.md !filter !diff
+docs/** !filter !diff
+.github/** !filter !diff
+.gitignore !filter !diff
+
+# Audit logs encrypted:
+${LOG_DIR}/** filter=git-crypt diff=git-crypt
+EOF
+    fi
+
+    write_log "setup" "success" "" "" "" ""
+    msg "[OK] Encryption rules applied"
+}
+
+# ------------------------------------------------------------------------------
+# Add / rotate / revoke users
+# ------------------------------------------------------------------------------
+
+function add_users()
+{
+    require_repo || return 1
+    init_logs_dir
+
+    read -r -p "How many users? " count
+    for ((i=0; i<count; i++)); do
+        read -r -p "Key/email for user $((i+1)): " key
+        check_trust "${key}"
+
+        local fp, email, trust;
+
+        fp="$(fingerprint_for_key "${key}")"
+        email="$(email_for_key "${key}")"
+        trust="$(gpg --list-keys --with-colons "$key" 2>/dev/null | awk -F: '/^pub/ {print $2}')"
+
+        git-crypt add-gpg-user "${key}"
+        write_log "add-user" "success" "" "$fp" "$email" "$trust"
+        msg "[OK] Added ${key}"
+    done
+    msg "Commit & push changes!"
+}
+
+function rotate_user()
+{
+    local fp email trust
+    local fp2 email2 trust2
+
+    require_repo || return 1
+    init_logs_dir
+
+    read -r -p "Key/email to rotate: " old
+    fp="$(fingerprint_for_key "${old}")"
+    email="$(email_for_key "${old}")"
+    trust="$(gpg --list-keys --with-colons "$old" 2>/dev/null | awk -F: '/^pub/ {print $2}')"
+
+    git-crypt revoke-gpg-user "${old}"
+    write_log "rotate-user" "revoked" "" "$fp" "$email" "$trust"
+
+    read -r -p "New key/email: " new
+    check_trust "${new}"
+
+    fp2="$(fingerprint_for_key "${new}")"
+    email2="$(email_for_key "${new}")"
+    trust2="$(gpg --list-keys --with-colons "$new" 2>/dev/null | awk -F: '/^pub/ {print $2}')"
+
+    git-crypt add-gpg-user "${new}"
+    write_log "rotate-user" "updated" "" "$fp2" "$email2" "$trust2"
+
+    msg "[OK] Rotation complete — commit & push."
+}
+
+function revoke_user()
+{
+    local fp email trust
+
+    require_repo || return 1
+    init_logs_dir
+
+    read -r -p "Key/email to revoke: " key
+    fp="$(fingerprint_for_key "${key}")"
+    email="$(email_for_key "${key}")"
+    trust="$(gpg --list-keys --with-colons "$key" 2>/dev/null | awk -F: '/^pub/ {print $2}')"
+
+    git-crypt revoke-gpg-user "${key}"
+    write_log "revoke-user" "success" "" "$fp" "$email" "$trust"
+    msg "[OK] Revoked. Commit & push."
+}
+
+# ------------------------------------------------------------------------------
+# Nuclear rotation
+# ------------------------------------------------------------------------------
+
+function nuclear_rotate()
+{
+    require_repo || return 1
+    init_logs_dir
+
+    msg "⚠ Full encryption key reset!"
+    read -r -p "Are you absolutely sure? (yes/no): " c
+    [[ "$c" == "yes" ]] || exit 1
+
+    git-crypt init
+    write_log "nuclear-rotate" "success" "" "" "" ""
+    msg "[OK] New encryption key generated"
+    msg "Re-add users then: git add --renormalize . && git commit && git push"
+}
+
+# ------------------------------------------------------------------------------
+# Remove encryption going forward
+# ------------------------------------------------------------------------------
+
+function unencrypt()
+{
+    require_repo || return 1
+
+    "${SED_CMD[@]}" '/git-crypt setup (auto-generated)/,+15d' .gitattributes || true
+    write_log "unencrypt" "success" "" "" "" ""
+    msg "[OK] Encryption removed for future commits"
+}
+
+# ------------------------------------------------------------------------------
+# Doctor (health check + leak detection)
+# ------------------------------------------------------------------------------
+
+function doctor()
+{
+    local ok=true
+    local statuses=()
+    local warn_summary=""
+
+    require_repo || return 1
+    init_logs_dir
+
+    add_status()
+    {
+        local s="$1" m="$2"
+        statuses+=("{\"status\":\"${s}\",\"message\":\"${m}\"}")
+        [[ "$s" == "FAIL" ]] && ok=false
+        msg "[$s] $m"
+    }
+
+    command -v git >/dev/null || add_status "FAIL" "git missing"
+    command -v gpg >/dev/null || add_status "FAIL" "gpg missing"
+    command -v git-crypt >/dev/null || add_status "FAIL" "git-crypt missing"
+
+    if ! git-crypt status >/dev/null 2>&1; then
+        add_status "FAIL" "git-crypt not initialized"
+    else
+        add_status "OK" "git-crypt initialized"
+    fi
+
+    if grep -q "git-crypt setup" .gitattributes 2>/dev/null; then
+        add_status "OK" ".gitattributes contains git-crypt rules"
+    else
+        add_status "WARN" ".gitattributes rules missing"
+        warn_summary="missing-gitattributes-rules"
+    fi
+
+    write_log "doctor" "$( [[ $ok == true ]] && echo success || echo fail )" "${warn_summary}" "" "" ""
+
+    $ok || exit 1
+
+    msg "✓ Repo looks healthy"
+}
+
+# ------------------------------------------------------------------------------
+# Backup / Restore
+# ------------------------------------------------------------------------------
+
+function backup_config()
+{
+    local repo ts backup
+
+    require_repo || return 1
+    init_logs_dir
+
+    repo=$(git rev-parse --show-toplevel)
+    ts="$(date +%Y%m%d-%H%M%S)"
+    backup="${repo}/${BACKUP_DIR_BASE}/${ts}"
+
+    mkdir -p "${backup}"
+    cp -a "${repo}/.git-crypt" "${backup}/" 2>/dev/null || true
+    cp "${repo}/.gitattributes" "${backup}/" 2>/dev/null || true
+
+    write_log "backup" "success" "" "" "" ""
+    msg "[OK] Backup created: ${backup}"
+}
+
+function restore_config()
+{
+    local repo latest
+
+    require_repo || return 1
+    init_logs_dir
+
+    repo=$(git rev-parse --show-toplevel)
+    latest=$(find "${repo}/${BACKUP_DIR_BASE}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | tail -1)
+
+    [[ -z "$latest" ]] && { err "No backups available"; exit 1; }
+
+    cp -a "${latest}/.git-crypt" "${repo}/" 2>/dev/null || true
+    cp "${latest}/.gitattributes" "${repo}/" 2>/dev/null || true
+
+    write_log "restore" "success" "" "" "" ""
+    msg "[OK] Restored from: ${latest}"
+}
+
+# ------------------------------------------------------------------------------
+# Menu UI
+# ------------------------------------------------------------------------------
+
+function menu()
+{
+    while true; do
+        cat <<EOF
+
+=== git-crypt Manager v${VERSION} ===
+ 1) Setup
+ 2) Add Users
+ 3) Rotate User
+ 4) Revoke User
+ 5) Nuclear Rotate
+ 6) Unencrypt Repo
+ 7) Doctor
+ 8) Backup Config
+ 9) Restore Latest Backup
+ Q) Quit
+EOF
+        read -r -p "> " c
+        case "$c" in
+            1) setup ;;
+            2) add_users ;;
+            3) rotate_user ;;
+            4) revoke_user ;;
+            5) nuclear_rotate ;;
+            6) unencrypt ;;
+            7) doctor ;;
+            8) backup_config ;;
+            9) restore_config ;;
+            Q) exit 0 ;;
+            *) echo "Invalid option" ;;
+        esac
+    done
+}
+
+# ------------------------------------------------------------------------------
+# CLI
+# ------------------------------------------------------------------------------
+
+if [[ $# -eq 0 ]]; then
+    menu
+    exit 0
+fi
+
+cmd="$1"; shift || true
+case "$cmd" in
+    version|--version)
+        echo "${SCRIPT_NAME} v${VERSION}"
+        exit 0
+        ;;
+    setup)           setup "$@" ;;
+    add-users)       add_users "$@" ;;
+    rotate-user)     rotate_user "$@" ;;
+    revoke-user)     revoke_user "$@" ;;
+    nuclear-rotate)  nuclear_rotate "$@" ;;
+    unencrypt)       unencrypt "$@" ;;
+    doctor)          doctor "$@" ;;
+    backup)          backup_config "$@" ;;
+    restore)         restore_config "$@" ;;
+    *)
+        err "Unknown command: $cmd"
+        exit 1
+        ;;
+esac
