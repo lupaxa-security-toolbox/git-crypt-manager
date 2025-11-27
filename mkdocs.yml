@@ -66,3 +66,4 @@ nav:
   - Security: security.md
   - Audit Logs: audit-logs.md
   - Troubleshooting: troubleshooting.md
+  - Version: version.md

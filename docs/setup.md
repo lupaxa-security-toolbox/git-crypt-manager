@@ -19,17 +19,17 @@ If no GPG key exists:
 gpg –default-new-key-algo rsa4096 –gen-key
 ```
 
-Installing git-crypt-manager.sh:
+Installing git-crypt-manager:
 
 ```bash
-chmod +x git-crypt-manager.sh
-mv git-crypt-manager.sh /usr/local/bin/
+chmod +x git-crypt-manager
+mv git-crypt-manager /usr/local/bin/
 ```
 
 Verify installation:
 
 ```bash
-git-crypt-manager.sh –version
+git-crypt-manager –version
 ```
 
 First-time secure repo setup:
@@ -37,8 +37,8 @@ First-time secure repo setup:
 ```bash
 git init secure-repo
 cd secure-repo
-git-crypt-manager.sh setup
-git-crypt-manager.sh add-users
+git-crypt-manager setup
+git-crypt-manager add-users
 git add –renormalize .
 git commit -m “Enable git-crypt encryption”
 git push

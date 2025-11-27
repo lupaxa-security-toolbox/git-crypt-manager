@@ -3,7 +3,7 @@
 Interactive usage:
 
 ```bash
-git-crypt-manager.sh
+git-crypt-manager
 
 Menu options:
 Setup
@@ -21,26 +21,26 @@ Quit
 CLI usage:
 
 ```bash
-git-crypt-manager.sh setup
-git-crypt-manager.sh add-users
-git-crypt-manager.sh rotate-user
-git-crypt-manager.sh revoke-user
-git-crypt-manager.sh nuclear-rotate
-git-crypt-manager.sh unencrypt
-git-crypt-manager.sh doctor
-git-crypt-manager.sh backup
-git-crypt-manager.sh restore
-git-crypt-manager.sh –version
+git-crypt-manager setup
+git-crypt-manager add-users
+git-crypt-manager rotate-user
+git-crypt-manager revoke-user
+git-crypt-manager nuclear-rotate
+git-crypt-manager unencrypt
+git-crypt-manager doctor
+git-crypt-manager backup
+git-crypt-manager restore
+git-crypt-manager –version
 ```
 
 Backup:
 
 ```bash
-git-crypt-manager.sh backup
+git-crypt-manager backup
 ```
 
 Restore:
 
 ```bash
-git-crypt-manager.sh restore
+git-crypt-manager restore
 ```

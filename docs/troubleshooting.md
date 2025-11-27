@@ -11,7 +11,7 @@ Problem: git-crypt not initialized
 Fix:
 
 ```bash
-git-crypt-manager.sh setup
+git-crypt-manager setup
 git add .gitattributes
 git commit -m “Initialize git-crypt”
 ```
@@ -20,7 +20,7 @@ Problem: Missing .gitattributes rules
 Fix:
 
 ```bash
-git-crypt-manager.sh setup
+git-crypt-manager setup
 git add .gitattributes
 git commit -m “Apply git-crypt attributes”
 ```
@@ -33,7 +33,7 @@ Check listed files for secrets
 Remove or replace secret content
 Rotate exposed credentials
 Commit and re-scan:
-git-crypt-manager.sh doctor –leaks
+git-crypt-manager doctor –leaks
 ```
 
 Problem: GPG trust warnings

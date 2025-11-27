@@ -19,7 +19,7 @@
 
 set -euo pipefail
 
-SCRIPT_NAME="git-crypt-manager.sh"
+SCRIPT_NAME="git-crypt-manager"
 VERSION="1.0.0"
 BACKUP_DIR_BASE=".git-crypt-backups"
 LOG_DIR=".git-crypt-logs"

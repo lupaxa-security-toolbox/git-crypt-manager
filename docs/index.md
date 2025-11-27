@@ -1,6 +1,6 @@
 # Lupaxa git-crypt Manager
 
-git-crypt-manager.sh is a tool for managing git-crypt encrypted repositories.
+git-crypt-manager is a tool for managing git-crypt encrypted repositories.
 
 Current Version: v0.1.0
 

@@ -1,0 +1,31 @@
+###############################################################################
+# git-crypt-manager ignore rules
+###############################################################################
+
+# Audit logs (encrypted but noisy)
+.git-crypt-logs/
+
+# Backups created by the script
+.git-crypt-backups/
+
+# MkDocs build output
+site/
+.mkdocs-cache/
+
+# Editor/OS clutter
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Shell history / temp
+*.tmp
+*.bak
+*.old
+tmp/
+temp/
+
+# Local-only config (if present)
+*.local
+*.override

@@ -74,8 +74,8 @@ Cross-platform: macOS (BSD) + Linux (GNU)
 Place this script in your PATH and make executable:
 
 ```bash
-chmod +x git-crypt-manager.sh
-mv git-crypt-manager.sh /usr/local/bin/
+chmod +x git-crypt-manager
+mv git-crypt-manager /usr/local/bin/
 ```
 
 (Optional) Enable Bash auto-completion:
@@ -89,27 +89,27 @@ source git-crypt-manager-completion.bash
 Interactive menu:
 
 ```bash
-git-crypt-manager.sh
+git-crypt-manager
 ```
 
 Command-line usage:
 
 ```bash
-git-crypt-manager.sh setup
-git-crypt-manager.sh add-users
-git-crypt-manager.sh rotate-user
-git-crypt-manager.sh revoke-user
-git-crypt-manager.sh nuclear-rotate
-git-crypt-manager.sh unencrypt
-git-crypt-manager.sh doctor
-git-crypt-manager.sh backup
-git-crypt-manager.sh restore
+git-crypt-manager setup
+git-crypt-manager add-users
+git-crypt-manager rotate-user
+git-crypt-manager revoke-user
+git-crypt-manager nuclear-rotate
+git-crypt-manager unencrypt
+git-crypt-manager doctor
+git-crypt-manager backup
+git-crypt-manager restore
 ```
 
 Show version:
 
 ```bash
-git-crypt-manager.sh --version
+git-crypt-manager --version
 ```
 
 ## Audit Logs
@@ -157,8 +157,8 @@ quit
 git init secure-repo
 cd secure-repo
 
-git-crypt-manager.sh setup
-git-crypt-manager.sh add-users
+git-crypt-manager setup
+git-crypt-manager add-users
 
 git add --renormalize .
 git commit -m "Enable git-crypt encryption"
@@ -177,7 +177,7 @@ git-crypt unlock
 Single user:
 
 ```bash
-git-crypt-manager.sh rotate-user
+git-crypt-manager rotate-user
 git commit -am "Rotate access"
 git push
 ```
@@ -185,7 +185,7 @@ git push
 Complete re-encryption:
 
 ```bash
-git-crypt-manager.sh nuclear-rotate
+git-crypt-manager nuclear-rotate
 git add --renormalize .
 git commit -m "Re-encrypt entire repo"
 git push
@@ -194,7 +194,7 @@ git push
 ## Remove Encryption Going Forward
 
 ```bash
-git-crypt-manager.sh unencrypt
+git-crypt-manager unencrypt
 git add --renormalize .
 git commit -m "Remove git-crypt"
 git push
@@ -207,13 +207,13 @@ git push
 Backup:
 
 ```bash
-git-crypt-manager.sh backup
+git-crypt-manager backup
 ```
 
 Restore most recent:
 
 ```bash
-    git-crypt-manager.sh restore
+    git-crypt-manager restore
 ```
 
 ## Recommended Team Workflow
@@ -236,7 +236,7 @@ git-crypt unlock
 Check repo health:
 
 ```bash
-git-crypt-manager.sh doctor
+git-crypt-manager doctor
 ```
 
 <footer>
