@@ -14,31 +14,31 @@
 
 <p align="center">
   <!-- Core project badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/certtool/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/git-crypt-manager/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/releases/latest">
-    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=Latest%20Release" alt="Latest Release"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/releases/latest">
+    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=Latest%20Release" alt="Latest Release"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/releases">
-    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=Released" alt="Release Date"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/releases">
+    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=Released" alt="Release Date"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/master">
-    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/certtool/latest.svg?style=for-the-badge&color=203959" alt="Commits Since Release"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/master">
+    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/git-crypt-manager/latest.svg?style=for-the-badge&color=203959" alt="Commits Since Release"/>
   </a>
   <br/>
   <!-- Community & ecosystem badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Contributors"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Contributors"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/issues">
-    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Issues"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/issues">
+    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Open Issues"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/pulls">
-    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/pulls">
+    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/certtool/blob/master/LICENSE.md">
-    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/certtool?style=for-the-badge&color=203959&label=License" alt="License"/>
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/blob/master/LICENSE.md">
+    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=License" alt="License"/>
   </a>
   <br />
 </p>
