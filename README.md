@@ -121,7 +121,7 @@ All operations generate encrypted JSON logs under:
 
 Example:
 
-```text
+```json
 {
     "timestamp": "2025-11-27T17:45:12Z",
     "version": "0.1.0",
