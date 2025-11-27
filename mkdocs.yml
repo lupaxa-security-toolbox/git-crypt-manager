@@ -1,4 +1,4 @@
-site_name: Lupaxa git-crypt Manager
+site_name: Lupaxa git-crypt-manager
 site_description: Secure lifecycle management for git-crypt encrypted repositories
 site_url: https://lupaxa-security-toolbox.github.io/git-crypt-manager
 repo_url: https://github.com/lupaxa-security-toolbox/git-crypt-manager

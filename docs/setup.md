@@ -22,8 +22,8 @@ gpg –default-new-key-algo rsa4096 –gen-key
 Installing git-crypt-manager:
 
 ```bash
-chmod +x git-crypt-manager
-mv git-crypt-manager /usr/local/bin/
+git clone https://github.com/lupaxa-security-toolbox/git-crypt-manager
+mv git-crypt-manager/src/git-crypt-manager /usr/local/bin/
 ```
 
 Verify installation:

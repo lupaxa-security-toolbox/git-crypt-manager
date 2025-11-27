@@ -1,4 +1,4 @@
-# Lupaxa git-crypt Manager
+# Lupaxa git-crypt-manager
 
 git-crypt-manager is a tool for managing git-crypt encrypted repositories.
 

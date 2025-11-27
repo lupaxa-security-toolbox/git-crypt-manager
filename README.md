@@ -43,11 +43,10 @@
   <br />
 </p>
 
-# git-crypt Manager
+# git-crypt-manager
 
 Secure lifecycle management for git-crypt encrypted repositories.
 
-Version: v1.0.0
 Cross-platform: macOS (BSD) + Linux (GNU)
 
 ## Features
@@ -74,8 +73,8 @@ Cross-platform: macOS (BSD) + Linux (GNU)
 Place this script in your PATH and make executable:
 
 ```bash
-chmod +x git-crypt-manager
-mv git-crypt-manager /usr/local/bin/
+git clone https://github.com/lupaxa-security-toolbox/git-crypt-manager
+mv git-crypt-manager/src/git-crypt-manager /usr/local/bin/
 ```
 
 (Optional) Enable Bash auto-completion:

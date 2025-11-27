@@ -4,8 +4,11 @@ Interactive usage:
 
 ```bash
 git-crypt-manager
+```
 
 Menu options:
+
+```text
 Setup
 Add users
 Rotate user
