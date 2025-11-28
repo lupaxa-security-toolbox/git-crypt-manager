@@ -19,7 +19,7 @@ Regardless of method:
 
 After unlock, all of your encrypted files look normal in the workspace for that job only.
 
-> Although this example using GitHub pipelines, the same principal will work for GitLab, BitBucket and many others.
+> Although these examples use GitHub pipelines, the same principal will work for GitLab, BitBucket and many other CI tools.
 
 ## Option A: Use git-crypt’s symmetric key (no GPG in CI)
 
