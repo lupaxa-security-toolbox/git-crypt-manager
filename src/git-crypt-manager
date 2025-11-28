@@ -168,7 +168,7 @@ function add_users()
         read -r -p "Key/email for user $((i+1)): " key
         check_trust "${key}"
 
-        local fp, email, trust;
+        local fp email trust;
 
         fp="$(fingerprint_for_key "${key}")"
         email="$(email_for_key "${key}")"
