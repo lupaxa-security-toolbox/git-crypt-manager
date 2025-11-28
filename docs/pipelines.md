@@ -85,7 +85,7 @@ jobs:
 
       - name: Build / deploy
         run: |
-          # At this point, encrypted files (e.g. *.json5) are in plaintext
+          # At this point, encrypted files are in plaintext
           ./scripts/build.sh
           ./scripts/deploy.sh
 ```
