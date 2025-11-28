@@ -68,6 +68,10 @@ Cross-platform: macOS (BSD) + Linux (GNU)
 - gpg (GnuPG-2 recommended)
 - git-crypt
 
+## Full Documentation
+
+Full documentation for git-crypt-mananger is available [here](https://lupaxa-security-toolbox.github.io/git-crypt-manager/).
+
 ## Installation
 
 Place this script in your PATH and make executable:
@@ -77,10 +81,10 @@ git clone https://github.com/lupaxa-security-toolbox/git-crypt-manager
 mv git-crypt-manager/src/git-crypt-manager /usr/local/bin/
 ```
 
-(Optional) Enable Bash auto-completion:
+Enable Bash auto-completion (Optional):
 
 ```bash
-source git-crypt-manager-completion.bash
+source git-crypt-manager/extras/git-crypt-manager-completion.bash
 ```
 
 ## Usage
@@ -212,7 +216,7 @@ git-crypt-manager backup
 Restore most recent:
 
 ```bash
-    git-crypt-manager restore
+git-crypt-manager restore
 ```
 
 ## Recommended Team Workflow

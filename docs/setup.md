@@ -32,11 +32,17 @@ Verify installation:
 git-crypt-manager –version
 ```
 
+Enable Bash auto-completion (Optional):
+
+```bash
+source git-crypt-manager/extras/git-crypt-manager-completion.bash
+```
+
 First-time secure repo setup:
 
 ```bash
-git init secure-repo
 cd secure-repo
+git init secure-repo
 git-crypt-manager setup
 git-crypt-manager add-users
 git add –renormalize .
