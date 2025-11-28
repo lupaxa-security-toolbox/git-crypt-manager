@@ -1,58 +1,62 @@
-# Setup Guide
+# 🔧 Repository Setup
 
-Requirements:
+GCM must be run **inside a Git repository**.
 
-- git
-- gpg (GNUPG recommended)
-- git-crypt installed
-
-Verify:
+## New Repo (Recommended)
 
 ```bash
-git-crypt –version
-gpg –list-secret-keys –keyid-format=long
+git init my-secure-repo
+cd my-secure-repo
+gcm setup
 ```
 
-If no GPG key exists:
+This performs:
+
+1. Initialize git-crypt
+2. Create .gitattributes with secure defaults
+3. Commit setup + encrypted log entry
+
+## Existing Repositories
+
+Supported as long as the repository is clean:
 
 ```bash
-gpg –default-new-key-algo rsa4096 –gen-key
+git status  # must show nothing to commit
+gcm setup
 ```
 
-Installing git-crypt-manager:
+⚠️ Files already committed will remain plaintext in history Rewrite history manually if required.
+
+## .gitattributes Rules
+
+Created/updated automatically:
 
 ```bash
-git clone https://github.com/lupaxa-security-toolbox/git-crypt-manager
-mv git-crypt-manager/src/git-crypt-manager /usr/local/bin/
+# git-crypt setup (auto-generated)
+* filter=git-crypt diff=git-crypt
+
+# Explicit plaintext-only
+README.md !filter !diff
+*.md !filter !diff
+docs/** !filter !diff
+.github/** !filter !diff
+.gitignore !filter !diff
+
+# Audit logs encrypted:
+.git-crypt-logs/** filter=git-crypt diff=git-crypt
 ```
 
-Verify installation:
+## Post-Setup
+
+Now add users:
 
 ```bash
-git-crypt-manager –version
+gcm add-users
 ```
 
-Enable Bash auto-completion (Optional):
+Then push!
 
 ```bash
-source git-crypt-manager/extras/git-crypt-manager-completion.bash
-```
-
-First-time secure repo setup:
-
-```bash
-cd secure-repo
-git init secure-repo
-git-crypt-manager setup
-git-crypt-manager add-users
-git add –renormalize .
-git commit -m "Enable git-crypt encryption"
-git push
-```
-
-User unlock workflow:
-
-```bash
-git clone
-git-crypt unlock
+git remote add origin <url>
+git push -u origin master
 ```

@@ -1,31 +1,53 @@
 # Troubleshooting
 
-Problem: Encrypted files unreadable
+## Repo is not clean
+
+```bash
+git add -A
+git commit -m "Save before encryption"
+```
+
+or
+
+```bash
+git stash
+```
+
+## Key Not Trusted
+
+```text
+ERROR: GPG key is NOT trusted enough
+```
+
+Fix:
+
+```bash
+gpg --edit-key <KEYID>
+trust
+4
+quit
+```
+
+Then rerun command.
+
+## git-crypt not initialized
+
+```bash
+gcm setup
+git add .gitattributes
+git commit -m "Initialize git-crypt"
+```
+
+## Encrypted files unreadable
 
 ```bash
 git-crypt unlock
 ```
 
-Problem: git-crypt not initialized
+## Missing .gitattributes rules
 
 ```bash
-git-crypt-manager setup
-git add .gitattributes
-git commit -m "Initialize git-crypt"
-```
-
-Problem: Missing .gitattributes rules
-
-```bash
-git-crypt-manager setup
+gcm setup
 git add .gitattributes
 git commit -m "Apply git-crypt attributes"
-```
-
-Problem: GPG trust warnings
-
-```bash
-gpg –edit-key
-trust
-set trust level to full/ultimate
 ```

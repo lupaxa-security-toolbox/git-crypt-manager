@@ -156,7 +156,8 @@ jobs:
           ./scripts/deploy.sh
 ```
 
-Notes:
+Security Notes
 
-- GPG is now in the CI trust chain; treat that private key as highly sensitive.
-- For CI-only, the symmetric key route (Option A) is usually "safer feeling": less moving parts.
+- Use GitHub Encrypted Secrets for GPG_PRIVATE_KEY
+- Use short-lived ephemeral GPG keys for CI when possible
+- Avoid giving CI overly broad access

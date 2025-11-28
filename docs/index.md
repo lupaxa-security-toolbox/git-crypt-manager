@@ -1,24 +1,33 @@
-# Lupaxa git-crypt-manager
+# Lupaxa GCM — Git-Crypt Manager
 
-git-crypt-manager is a tool for managing git-crypt encrypted repositories.
+GCM is a secure workflow assistant for managing repository encryption with [`git-crypt`](https://github.com/AGWA/git-crypt).
 
-Key features:
+It automates:
 
-- Secure lifecycle management for encrypted repositories
-- Encrypted JSON audit logs
-- Secret leak scanning
-- Menu UI and CLI usage
-- Cross-platform: macOS and Linux
+- Setup of bidirectional encryption rules
+- Trusted GPG key access control
+- Add / rotate / revoke git-crypt collaborators
+- Listing active encryption users
+- Encrypted audit logging
 
-What it does:
+GCM enforces security best practices:
 
-- Initialise git-crypt
-- Apply encryption rules to .gitattributes
-- Add / rotate / revoke GPG users
-- Perform full key nuclear rotate
-- Remove encryption going forward only
-- Doctor health checks
-- Backup and restore git-crypt configuration
-- Full audit log history encrypted at rest
+| Area           | Guarantee                                          |
+| :------------- | :------------------------------------------------- |
+| Repo state     | Must be clean before operations.                   |
+| User control   | Keys must be *fully* trusted (trust = `f` or `u`). |
+| Logs           | Stored encrypted under `.git-crypt-logs/`.         |
+| History safety | Never forces rewrite of existing commits.          |
+| Automation     | Metadata auto-commit ensures no plaintext leaks.   |
 
-If you need a secure and auditable encrypted repo, this tool is designed for you.
+## Quick Start
+
+```bash
+git init secure-repo
+cd secure-repo
+
+gcm setup
+gcm add-users
+```
+
+See [Usage](usage.md) for all commands.

@@ -1,6 +1,6 @@
 # Project Version
 
-Current version: `0.1.0`
+Current version: `0.1.1`
 
 This version number reflects the current active development state of the project.
 Releases follow a structured versioning flow based on **semantic versioning**,

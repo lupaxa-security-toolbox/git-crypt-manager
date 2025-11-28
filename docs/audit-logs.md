@@ -1,29 +1,20 @@
-# Audit Logging
+# Encrypted Audit Logs
 
-Log location:
+Every operation that changes access controls is logged to: `.git-crypt-logs/`
 
-```text
-.git-crypt-logs/YYYYMMDDTHHMMSSZ-.json
+and encrypted via git-crypt.
+
+Logs include:
+
+- Operation type (`add-users`, `rotate-users`, `revoke-users`)
+- Timestamp
+- GPG fingerprint + identity
+- Result status
+
+Example filename:
+
+```bash
+.git-crypt-logs/20251128T103754Z-add-user.json
 ```
 
-Information stored:
-
-- timestamp
-- version
-- action
-- actor git identity
-- actor GPG identity
-- result
-- warnings (if any)
-- key fingerprint and email (when relevant)
-
-All logs encrypted automatically via git-crypt.
-
-Logs are suitable for:
-
-- Compliance reporting
-- Security auditing
-- Incident reviews
-- Developer accountability
-
-JSON logs are machine-parsable for CI integration or dashboards.
+These logs ensure **compliance + forensic traceability**.

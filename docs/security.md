@@ -1,41 +1,25 @@
-# Security Model
+# 🔐 Security Model
 
-Encryption:
+GCM is designed for **zero plaintext leakage** once encryption is enabled.
 
-- Everything encrypted by default
-- Except:
+## Threat Controls
 
-```bash
-    README.md
-    .md
-    docs/*
-    .github/**
-    .gitignore
-```
+| Mitigation                    | Purpose                               |
+| :---------------------------- | :------------------------------------ |
+| Trusted keys required         | Prevent unauthorized access.          |
+| Auto-commit metadata          | Prevent staging plaintext content.    |
+| Encrypted access logs         | Forensic accountability.              |
+| Clean-repo enforcement        | Avoid accidental unencrypted commits. |
+| Explicit plaintext-only rules | Docs & CI configs remain readable.    |
 
-- Audit logs (.git-crypt-logs/**) are encrypted
+## What GCM Does *Not* Cover
 
-Trust model for GPG keys:
+- Existing plaintext history → requires manual rewrite (BFG, git-filter-repo)
+- GPG key compromise → rotate immediately via `gcm rotate-users`
+- User device compromise → revoke via `gcm revoke-users`
 
-- Full or ultimate trust recommended
-- Low trust (marginal/unknown) triggers warning + confirmation
+## Security Best Practices
 
-Promoting trust manually:
-
-```bash
-gpg –edit-key
-trust
-select full
-quit
-```
-
-Audit logging:
-
-- All operations logged in JSON
-- Logs committed and encrypted
-- Provides tamper-evident history
-
-Leak detection:
-
-- Detects high-risk plaintext content
-- Protects against accidental token or key exposure
+- Run `gcm setup` before adding sensitive files
+- Use strong GPG tokens (YubiKey highly recommended)
+- Periodically audit active users via `gcm list-users`
