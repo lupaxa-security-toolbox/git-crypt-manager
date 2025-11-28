@@ -54,7 +54,7 @@ In the repo/org settings → Secrets and variables → Actions:
 
 Example workflow snippet:
 
-```bash
+```yaml
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -119,7 +119,7 @@ Add to GitHub Actions secrets:
 
 ### In your workflow: import key + unlock
 
-```bash
+```yaml
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
