@@ -1,4 +1,3 @@
-<!-- markdownlint-disable -->
 <p align="center">
   <a href="https://github.com/lupaxa-security-toolbox">
     <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
@@ -274,7 +273,6 @@ If CI only needs plaintext docs or build artifacts, you can avoid unlocking alto
 | Files show as unencrypted in git-crypt status | Commit .gitattributes first, then rerun command. |
 | git-crypt unlock fails                        | Ensure your GPG private key is loaded & trusted. |
 
-
 ## Logs & Compliance
 
 All operations write structured encrypted JSON logs to:
@@ -299,6 +297,7 @@ Remove all encryption and users (dangerous):
 ```bash
 gcm unencrypt
 ```
+
 This is a nuclear action — restores the repo to plaintext permanently.
 
 ## Commands Summary
