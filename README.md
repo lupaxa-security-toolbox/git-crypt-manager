@@ -228,18 +228,6 @@ docs/** !filter !diff
 .git-crypt-logs/** filter=git-crypt diff=git-crypt
 ```
 
-Result:
-
-| File               | Encrypted? |
-| :----------------- | :--------: |
-| JSON/YAML/configs  | ✅ Yes     |
-| Source code        | ✅ Yes     |
-| Secrets            | ✅ Yes     |
-| Markdown docs      | ❌ No      |
-| .github/ workflows | ❌ No      |
-| .gitignore         | ❌ No      |
-| Logs               | ✅ Yes     |
-
 > [!NOTE]
 > This is just the default `paranoid` setup - you can change `.gitattributes` to meet your needs but the initial default is encrypt `everything`.
 
