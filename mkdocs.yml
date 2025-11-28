@@ -62,6 +62,7 @@ nav:
   - Home: index.md
   - Setup: setup.md
   - Usage: usage.md
+  - Key Generation: key-generation.md
   - Pipelines: pipelines.md
   - Security: security.md
   - Audit Logs: audit-logs.md
