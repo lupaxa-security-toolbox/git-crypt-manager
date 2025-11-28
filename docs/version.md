@@ -11,6 +11,6 @@ indicate ongoing work prior to a final stable release.
 Version information is automatically managed using the project’s
 *Makefile* and *bump-my-version* workflow. This ensures consistent tagging
 and reduces the risk of manual versioning mistakes. Developers can refer to the
-“Versioning” section of the Developer Guide for instructions on how to
+"Versioning" section of the Developer Guide for instructions on how to
 bump versions, move between development and release cycles, and publish
 new releases.

@@ -46,7 +46,7 @@ git init secure-repo
 git-crypt-manager setup
 git-crypt-manager add-users
 git add –renormalize .
-git commit -m “Enable git-crypt encryption”
+git commit -m "Enable git-crypt encryption"
 git push
 ```
 
