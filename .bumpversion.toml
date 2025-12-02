@@ -1,4 +1,6 @@
-[bumpversion]
+# .bumpversion.toml
+
+[tool.bumpversion]
 current_version = "0.1.1"
 
 # Treat the entire version as a single opaque string part: "version"
@@ -34,13 +36,14 @@ post_commit_hooks = [
 ]
 
 # Files where versions are updated
-[[bumpversion.files]]
+
+[[tool.bumpversion.files]]
 filename = "src/git-crypt-manager"
 search = '^VERSION="{current_version}"$'
 replace = 'VERSION="{new_version}"'
 use_regex = true
 
-[[bumpversion.files]]
+[[tool.bumpversion.files]]
 filename = "docs/version.md"
 search = '^Current version: `{current_version}`$'
 replace = 'Current version: `{new_version}`'

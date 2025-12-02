@@ -26,6 +26,8 @@ PROJECT_VERSION := $(shell sed -n 's/^VERSION="\(.*\)"/\1/p' $(SCRIPT) | head -n
 	bump-patch \
 	bump-minor \
 	bump-major \
+	bump-show \
+	git-clean \
 	version \
 	clean
 
@@ -43,6 +45,7 @@ help:
 	@echo "  bump-patch      Bump patch version (X.Y.Z -> X.Y.(Z+1))"
 	@echo "  bump-minor      Bump minor version (X.Y.Z -> X.(Y+1).0)"
 	@echo "  bump-major      Bump major version (X.Y.Z -> (X+1).0.0)"
+	@echo "  bump-show       Show bump-my-version's current and next version"
 	@echo
 	@echo "  version         Show current script version"
 	@echo "  clean           Remove build artefacts (site/, etc.)"
@@ -61,7 +64,14 @@ docs-serve:
 # Versioning (bump-my-version)
 # ---------------------------------------------------------------------------
 
-bump-patch:
+git-clean:
+	@git diff --quiet || (echo "✖ Repo has uncommitted changes"; exit 1)
+	@git diff --cached --quiet || (echo "✖ Repo has staged but uncommitted changes"; exit 1)
+
+bump-show:
+	$(BUMP) show
+
+bump-patch: git-clean
 	@current="$(PROJECT_VERSION)"; \
 	base="$${current%%-*}"; \
 	major="$${base%%.*}"; \
@@ -73,7 +83,7 @@ bump-patch:
 	echo "Bump patch: $$current -> $$new_version"; \
 	$(BUMP) bump version --new-version "$$new_version"
 
-bump-minor:
+bump-minor: git-clean
 	@current="$(PROJECT_VERSION)"; \
 	base="$${current%%-*}"; \
 	major="$${base%%.*}"; \
@@ -84,7 +94,7 @@ bump-minor:
 	echo "Bump minor: $$current -> $$new_version"; \
 	$(BUMP) bump version --new-version "$$new_version"
 
-bump-major:
+bump-major: git-clean
 	@current="$(PROJECT_VERSION)"; \
 	base="$${current%%-*}"; \
 	major="$${base%%.*}"; \
