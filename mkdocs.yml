@@ -1,0 +1,70 @@
+site_name: Lupaxa git-crypt-manager
+site_description: Secure lifecycle management for git-crypt encrypted repositories
+site_url: https://lupaxa-security-toolbox.github.io/git-crypt-manager
+repo_url: https://github.com/lupaxa-security-toolbox/git-crypt-manager
+repo_name: lupaxa-security-toolbox/git-crypt-manager
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.indexes
+    - toc.integrate
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+    - scheme: slate
+      primary: custom
+      accent: custom
+  icon:
+    repo: fontawesome/brands/github
+
+copyright: |
+  <p class="lupaxa-footer">
+    <strong>&copy; The Lupaxa Project.</strong><br />
+    <em>
+      Where exploration meets precision.<br />
+      Where the untamed meets the engineered.
+    </em>
+  </p>
+
+extra:
+  generator: false
+
+# Custom CSS to inject Lupaxa colours
+extra_css:
+  - css/palette.css
+
+# "Edit this page" links
+edit_uri: edit/main/docs/
+
+markdown_extensions:
+  - admonition
+  - def_list
+  - toc:
+      permalink: true
+  - codehilite:
+      guess_lang: false
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+
+nav:
+  - Home: index.md
+  - Setup: setup.md
+  - Usage: usage.md
+  - Key Generation: key-generation.md
+  - Pipelines: pipelines.md
+  - Security: security.md
+  - Audit Logs: audit-logs.md
+  - Troubleshooting: troubleshooting.md
+  - Version: version.md

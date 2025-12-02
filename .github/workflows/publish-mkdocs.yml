@@ -1,0 +1,39 @@
+name: Generate Mkdocs
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "pyproject.toml"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+jobs:
+  publish-mkdocs:
+    name: Publish Mkdocs
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-publish-mkdocs.yml@master
+    secrets: inherit
+    with:
+      python-version: "3.13"
+      use-dev-extras: true
+
+  status-check:
+    name: Publish Mkdocs Status
+    needs:
+      - publish-mkdocs
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
