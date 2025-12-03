@@ -1,6 +1,6 @@
-# Bash completion for git-crypt-manager.sh
+# Bash completion for gcm.sh
 
-__git_crypt_manager_complete() {
+__gcm_complete() {
     local cur
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
@@ -13,8 +13,8 @@ __git_crypt_manager_complete() {
     return 0
 }
 
-complete -F __git_crypt_manager_complete git-crypt-manager.sh
+complete -F __gcm_complete gcm.sh
 
-# echo "source /path/to/git-crypt-manager-completion.bash" >> ~/.bashrc
+# echo "source /path/to/gcm-completion.bash" >> ~/.bashrc
 # or ~/.bash_profile depending on your setup
 # source ~/.bashrc
