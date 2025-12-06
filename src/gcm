@@ -198,6 +198,9 @@ setup(){
 * filter=git-crypt diff=git-crypt
 
 # Explicit plaintext-only
+.gitattributes !filter !diff
+
+# Explicit plaintext-only
 README.md !filter !diff
 *.md !filter !diff
 docs/** !filter !diff
