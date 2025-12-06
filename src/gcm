@@ -199,6 +199,7 @@ setup(){
 
 # Explicit plaintext-only
 .gitattributes !filter !diff
+.git-crypt/** !filter !diff
 
 # Explicit plaintext-only
 README.md !filter !diff
