@@ -18,8 +18,8 @@ permissions:
   actions: read
   contents: read
   deployments: write
-  pages: write
   id-token: write
+  pages: write
 
 jobs:
   publish-mkdocs:
