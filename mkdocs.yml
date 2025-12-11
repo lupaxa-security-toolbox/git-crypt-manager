@@ -4,7 +4,7 @@ site_url: https://lupaxa-security-toolbox.github.io/git-crypt-manager
 repo_url: https://github.com/lupaxa-security-toolbox/git-crypt-manager
 repo_name: lupaxa-security-toolbox/git-crypt-manager
 
-docs_dir: docs
+docs_dir: mkdocs
 
 theme:
   name: material
@@ -41,9 +41,6 @@ extra:
 # Custom CSS to inject Lupaxa colours
 extra_css:
   - css/palette.css
-
-# "Edit this page" links
-edit_uri: edit/main/docs/
 
 markdown_extensions:
   - admonition
