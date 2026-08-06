@@ -6,7 +6,7 @@ and encrypted via git-crypt.
 
 Logs include:
 
-- Operation type (`add-users`, `rotate-users`, `revoke-users`)
+- Operation type (`add-user`, `rotate-user`, `revoke-user`, …)
 - Timestamp
 - GPG fingerprint + identity
 - Result status

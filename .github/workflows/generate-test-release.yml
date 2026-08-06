@@ -1,17 +1,13 @@
-name: Publish MkDocs
+name: Generate Test Release
+
+# Makefile mapping: make bump-*-rc → version X.Y.Z-rcN → tag vX.Y.Z-rcN
+# Creates a GitHub prerelease (not a draft).
+# -devN tags do not trigger this workflow (local / in-repo WIP only).
 
 on:
   push:
-    branches:
-      - master
-    paths:
-      - ".github/workflows/publish-mkdocs.yml"
-      - "mkdocs/**"
-      - "mkdocs.yml"
-      - "overrides/**"
-      - "requirements.txt"
-
-  workflow_dispatch:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,24 +15,22 @@ concurrency:
 
 permissions:
   actions: read
-  contents: read
-  deployments: write
-  id-token: write
-  pages: write
+  contents: write
 
 jobs:
-  publish-mkdocs:
-    name: Publish MkDocs
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-mkdocs-site-publisher.yml@master
-    secrets: inherit
+  generate-release-notes:
+    name: Generate Release Notes
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-github-release-generator.yml@master
     with:
-      python-version: "3.13"
-      cleanup: true
+      draft: false
+      prerelease: true
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
 
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:
-      - publish-mkdocs
+      - generate-release-notes
     if: always()
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 

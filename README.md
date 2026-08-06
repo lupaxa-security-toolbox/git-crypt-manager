@@ -14,7 +14,7 @@
 <p align="center">
   <!-- Core project badges -->
   <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/git-crypt-manager/ci.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
+    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/git-crypt-manager/shell-script-linter.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
   </a>
   <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/releases/latest">
     <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=Latest%20Release" alt="Latest Release"/>
@@ -36,7 +36,7 @@
   <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/pulls">
     <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/blob/master/LICENSE.md">
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/blob/master/LICENCE">
     <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=License" alt="License"/>
   </a>
   <br />
@@ -248,7 +248,7 @@ Example GitHub workflow snippet:
 ```
 
 > [!NOTE]
-> For more information of pipelines please refer to the [main documentation](https://lupaxa-security-toolbox.github.io/git-crypt-manager/pipelines/)
+> For more information of pipelines please refer to the [main documentation](https://git-crypt-manager.thelupaxaproject.org/pipelines/)
 
 If CI only needs plaintext docs or build artifacts, you can avoid unlocking altogether.
 

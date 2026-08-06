@@ -15,8 +15,8 @@ GCM is designed for **zero plaintext leakage** once encryption is enabled.
 ## What GCM Does *Not* Cover
 
 - Existing plaintext history → requires manual rewrite (BFG, git-filter-repo)
-- GPG key compromise → rotate immediately via `gcm rotate-users`
-- User device compromise → revoke via `gcm revoke-users`
+- GPG key compromise → rotate immediately via `gcm rotate-user`
+- User device compromise → revoke via `gcm revoke-user`
 
 ## Security Best Practices
 
