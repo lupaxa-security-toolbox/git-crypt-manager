@@ -9,13 +9,13 @@ There are two sane patterns for using git-crypt secrets in a build/deploy:
 
 Regardless of method:
 
-1. Store a key (GPG or git-crypt symmetric) as a CI secret
-2. In the workflow:
-    1. Install git-crypt (and maybe GPG)
-    2. Checkout repo (encrypted files)
-    3. Import key
-    4. Run git-crypt unlock
-    5. Build/deploy using decrypted files
+1.   Store a key (GPG or git-crypt symmetric) as a CI secret
+2.   In the workflow:
+     1. Install git-crypt (and maybe GPG)
+     2. Checkout repo (encrypted files)
+     3. Import key
+     4. Run git-crypt unlock
+     5. Build/deploy using decrypted files
 
 After unlock, all of your encrypted files look normal in the workspace for that job only.
 
