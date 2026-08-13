@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/lupaxa-security-toolbox">
-    <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/security-toolbox/readme-logo.png" alt="Project Logo" width="256"/><br/>
   </a>
 </p>
 
@@ -22,7 +22,7 @@
   <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/releases">
     <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=Released" alt="Release Date"/>
   </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/master">
+  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/commits/master">
     <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/git-crypt-manager/latest.svg?style=for-the-badge&color=203959" alt="Commits Since Release"/>
   </a>
   <br/>
