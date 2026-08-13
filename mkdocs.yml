@@ -99,13 +99,13 @@ plugins:
 nav:
   - Home: index.md
   - Setup: setup.md
-  - Usage: usage.md
-  - Key Generation: key-generation.md
-  - Pipelines: pipelines.md
+  - Usage:
+      - Overview: usage.md
+      - Keys: key-generation.md
+      - Pipelines: pipelines.md
   - Security: security.md
-  - Audit Logs: audit-logs.md
+  - Audit: audit-logs.md
   - Troubleshooting: troubleshooting.md
-  - Version: version.md
 
 markdown_extensions:
   - abbr
