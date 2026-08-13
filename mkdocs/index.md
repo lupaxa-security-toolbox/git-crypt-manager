@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="assets/images/logo.png" alt="Git Crypt Manager logo" width="400" />
-</p>
-
 # Lupaxa GCM — Git-Crypt Manager
 
 GCM is a secure workflow assistant for managing repository encryption with [`git-crypt`](https://github.com/AGWA/git-crypt).
