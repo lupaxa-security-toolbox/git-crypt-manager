@@ -1,4 +1,4 @@
-# Lupaxa GCM — Git-Crypt Manager
+# Git Crypt Manager (GCM)
 
 GCM is a secure workflow assistant for managing repository encryption with [`git-crypt`](https://github.com/AGWA/git-crypt).
 
