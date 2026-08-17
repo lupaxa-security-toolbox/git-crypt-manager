@@ -1,24 +1,25 @@
-###############################################################################
-# git-crypt-manager ignore rules
-###############################################################################
+# OS
+.DS_Store
+Thumbs.db
 
-# Audit logs (encrypted but noisy)
-.git-crypt-logs/
-
-# Backups created by the script
-.git-crypt-backups/
-
-# Private Superpowers specs/plans (symlink into Lupaxa cursor-docs vault)
+# Cursor
+.cursor/
+.superpowers/
+.worktrees/
 cursor-docs
 
-# Never push local Cursor project config
-.cursor/
+# Git-crypt
+.git-crypt-logs/
+.git-crypt-backups/
 
-.worktrees/
+# Make
 .makefiles/
-.superpowers/
+
+# MkDocs
 site/
 .mkdocs-cache/
+
+# Python
 .venv/
 venv/
 __pycache__/
@@ -29,8 +30,8 @@ __pycache__/
 dist/
 build/
 *.egg-info/
-.DS_Store
-Thumbs.db
+
+# Temporary
 *.swp
 *.swo
 *~
