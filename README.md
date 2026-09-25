@@ -77,7 +77,17 @@ If a key is not trusted, GCM will refuse to use it and show instructions to fix 
 
 ## Install
 
-Place the script anywhere in your PATH, e.g.:
+With Homebrew:
+
+```bash
+brew tap the-lupaxa-project/tap
+brew trust the-lupaxa-project/tap
+brew install git-crypt-manager
+```
+
+The command is `gcm`. Homebrew also installs `git`, `git-crypt`, and GnuPG.
+
+Or place the script anywhere in your `PATH`:
 
 ```bash
 git clone https://github.com/lupaxa-security-toolbox/git-crypt-manager

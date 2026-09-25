@@ -20,6 +20,18 @@ GCM enforces security best practices:
 | History safety | Never forces rewrite of existing commits.          |
 | Automation     | Metadata auto-commit ensures no plaintext leaks.   |
 
+## Install
+
+With Homebrew:
+
+```bash
+brew tap the-lupaxa-project/tap
+brew trust the-lupaxa-project/tap
+brew install git-crypt-manager
+```
+
+The command is `gcm`.
+
 ## Quick Start
 
 ```bash
