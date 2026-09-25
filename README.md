@@ -4,45 +4,7 @@
   </a>
 </p>
 
-<h3 align="center">
-  The Lupaxa Security Toolbox<br />
-  Part of The Lupaxa Project
-</h3>
-
-<br />
-
-<p align="center">
-  <!-- Core project badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/actions">
-    <img src="https://img.shields.io/github/actions/workflow/status/lupaxa-security-toolbox/git-crypt-manager/shell-script-linter.yml?style=for-the-badge&branch=master&label=build%20status&" alt="Build Status"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/releases/latest">
-    <img src="https://img.shields.io/github/v/release/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=Latest%20Release" alt="Latest Release"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/releases">
-    <img src="https://img.shields.io/github/release-date/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=Released" alt="Release Date"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/commits/master">
-    <img src="https://img.shields.io/github/commits-since/lupaxa-security-toolbox/git-crypt-manager/latest.svg?style=for-the-badge&color=203959" alt="Commits Since Release"/>
-  </a>
-  <br/>
-  <!-- Community & ecosystem badges -->
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/graphs/contributors">
-    <img src="https://img.shields.io/github/contributors/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Contributors"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/issues">
-    <img src="https://img.shields.io/github/issues/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Open Issues"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/pulls">
-    <img src="https://img.shields.io/github/issues-pr/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959" alt="Open Pull Requests"/>
-  </a>
-  <a href="https://github.com/lupaxa-security-toolbox/git-crypt-manager/blob/master/LICENCE">
-    <img src="https://img.shields.io/github/license/lupaxa-security-toolbox/git-crypt-manager?style=for-the-badge&color=203959&label=License" alt="License"/>
-  </a>
-  <br />
-</p>
-
-<h1 align="center">GCM — Git-Crypt Manager</h1>
+<h1 align="center">Git Crypt Manager</h1>
 
 A secure, guided automation tool for managing encrypted repositories using [`git-crypt`](https://github.com/AGWA/git-crypt).
 
@@ -55,7 +17,7 @@ A secure, guided automation tool for managing encrypted repositories using [`git
 - Automated git-crypt metadata commits
 - `list-users` command for visibility
 
-## Security guarantees
+## Security Guarantees
 
 GCM enforces:
 
@@ -102,7 +64,7 @@ Verify:
 gcm --help
 ```
 
-## Workflow: Starting a New Secure Repo
+## Starting a New Secure Repo
 
 > [!IMPORTANT]
 > YOU MUST BEGIN WITH A CLEAN EMPTY REPO
@@ -134,7 +96,7 @@ Everything except docs, .github, and Markdown is encrypted.
 
 ## Managing Users
 
-### Add users
+### Add Users
 
 ```bash
 gcm add-users
@@ -148,7 +110,7 @@ Flow:
 4. Each approved user is added and logged
 5. All changes are committed
 
-### Rotate users
+### Rotate Users
 
 Used when someone gets a new GPG key:
 
@@ -166,7 +128,7 @@ Flow:
 6. Each approved user is added and logged
 7. All changes are committed
 
-### Revoke users
+### Revoke Users
 
 Used when a user leaves the project:
 
@@ -241,7 +203,7 @@ docs/** !filter !diff
 > [!NOTE]
 > This is just the default `paranoid` setup - you can change `.gitattributes` to meet your needs but the initial default is encrypt `everything`.
 
-## Continuous Integration (optional)
+## Continuous Integration
 
 To decrypt in CI:
 
@@ -258,7 +220,7 @@ Example GitHub workflow snippet:
 ```
 
 > [!NOTE]
-> For more information of pipelines please refer to the [main documentation](https://git-crypt-manager.thelupaxaproject.org/pipelines/)
+> For more information of pipelines please refer to the [main documentation](https://git-crypt-manager.thelupaxaproject.org/examples/).
 
 If CI only needs plaintext docs or build artifacts, you can avoid unlocking altogether.
 
@@ -271,7 +233,7 @@ If CI only needs plaintext docs or build artifacts, you can avoid unlocking alto
 | Files show as unencrypted in git-crypt status | Commit .gitattributes first, then rerun command. |
 | git-crypt unlock fails                        | Ensure your GPG private key is loaded & trusted. |
 
-## Logs & Compliance
+## Logs and Compliance
 
 All operations write structured encrypted JSON logs to:
 
@@ -310,14 +272,18 @@ This is a nuclear action — restores the repo to plaintext permanently.
 | gcm unencrypt    | Completely disable encryption (dangerous). |
 | gcm help         | Show help.                                 |
 
-<h1>&nbsp;</h1>
-<p align="center">
-    <strong>
-        &copy; The Lupaxa Project.
-    </strong>
-    <br />
-    <em>
-        Where exploration meets precision.<br />
-        Where the untamed meets the engineered.
-    </em>
-</p>
+## Documentation
+
+The published guide is at
+<https://git-crypt-manager.thelupaxaproject.org/>.
+
+Site Markdown lives in `mkdocs/`.
+
+```bash
+python -m pip install -r requirements.txt
+make mkdocs-serve
+```
+
+<a href="https://github.com/the-lupaxa-project">
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/components/footer-for-child-orgs.svg" alt="The Lupaxa Project Footer" width="100%" />
+</a>

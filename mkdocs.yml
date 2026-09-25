@@ -3,7 +3,7 @@
 # Site Information
 # =============================================================================
 
-site_name: git-crypt-manager
+site_name: Git Crypt Manager
 
 site_description: >-
   Secure lifecycle management for git-crypt encrypted repositories.
@@ -58,6 +58,9 @@ use_directory_urls: true
 theme:
   name: material
   custom_dir: overrides
+  font:
+    text: IBM Plex Sans
+    code: IBM Plex Mono
   language: en
   logo: assets/images/logo.png
   favicon: assets/images/favicon.png
@@ -96,14 +99,10 @@ hooks:
 
 nav:
   - Home: index.md
-  - Setup: setup.md
-  - Usage:
-      - Overview: usage.md
-      - Keys: key-generation.md
-      - Pipelines: pipelines.md
-  - Security: security.md
-  - Audit: audit-logs.md
-  - Troubleshooting: troubleshooting.md
+  - Getting Started: getting-started.md
+  - Usage: usage.md
+  - Reference: reference.md
+  - Examples: examples.md
 
 markdown_extensions:
   - abbr
