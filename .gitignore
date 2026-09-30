@@ -15,10 +15,6 @@ cursor-docs
 # Make
 .makefiles/
 
-# MkDocs
-site/
-.mkdocs-cache/
-
 # Python
 .venv/
 venv/
